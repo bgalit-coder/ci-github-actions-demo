@@ -55,6 +55,26 @@ Only Python standard library modules are used, so no external dependencies are r
 
 ---
 
+## Task 4: Matrix Builds
+
+### Description
+This task further extends the workflow by introducing **matrix builds**.
+
+The same test suite is executed across multiple Python versions to ensure compatibility
+and consistent behavior.
+
+### Python Versions Tested
+- Python 3.7
+- Python 3.8
+- Python 3.9
+- Python 3.10
+
+The workflow uses a matrix strategy so that the job runs once for each Python version.
+
+> Note: The workflow uses the Ubuntu 22.04 runner to ensure compatibility with Python 3.7.
+
+---
+
 ## GitHub Actions Workflow
 
 ### Trigger
@@ -64,9 +84,10 @@ The workflow runs automatically on every push to:
 
 ### Steps Performed
 1. Check out the repository code
-2. Set up Python version 3.9 using actions/setup-python@v4
-3. Install dependencies (only if a requirements.txt file exists)
-4. Run unit tests using unittest
+2. Print a Hello message
+3. Set up the required Python version (using a matrix build)
+4. Install dependencies (if a requirements.txt file exists)
+5. Run unit tests using unittest
 
 ---
 
@@ -95,7 +116,8 @@ python -m unittest -v
 When changes are pushed to the repository:
 - The workflow runs automatically
 - The Hello message is printed in the logs
-- Unit tests are executed
+- Tests are executed for each Python version in the matrix
+- Test results are displayed in the GitHub Actions logs
 - The workflow completes successfully if all tests pass
 
 ---
