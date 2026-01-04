@@ -1,0 +1,19 @@
+name: Hello CI (Self-Hosted Runner)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  hello-self-hosted:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print Hello message
+        run: echo "Hello, CI with GitHub Actions! (self-hosted)"
+
+      - name: Run tests
+        run: python -m unittest -v
+
