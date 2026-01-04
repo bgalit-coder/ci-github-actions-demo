@@ -1,6 +1,8 @@
 # ci-github-actions-demo
 
-This repository demonstrates basic Continuous Integration (CI) using GitHub Actions.
+This repository demonstrates Continuous Integration (CI) concepts using GitHub Actions.
+It was built step by step as part of a CI learning exercise, starting from a basic workflow
+and gradually adding testing, matrix builds, and a self-hosted runner.
 
 The project includes:
 - A basic GitHub Actions workflow triggered on every push to the main branch
@@ -98,9 +100,9 @@ The workflow runs automatically on every push to:
 ├── test_main.py
 ├── README.md
 └── .github
-    └── workflows
-        └── hello-ci.yml
-
+  └── workflows
+      ├── hello-ci.yml
+      └── hello-ci-self-hosted.yml
 ---
 
 ## Running Tests Locally
@@ -122,8 +124,43 @@ When changes are pushed to the repository:
 
 ---
 
+## Bonus: Self-Hosted Runner (Windows)
+
+### Goal
+Set up a self-hosted GitHub Actions runner on a Windows machine and run a workflow using it.
+
+### Setup Summary
+- A self-hosted runner was configured from the repository settings:
+  **Settings → Actions → Runners**
+- The runner was installed and configured on a local Windows machine
+- The runner was registered to this repository using a temporary registration token
+- The runner is executed manually using `run.cmd`
+
+### Workflow Configuration
+A dedicated workflow was created to run on the self-hosted runner without affecting the existing CI workflows.
+
+Key characteristics:
+- Triggered manually using `workflow_dispatch`
+- Runs on:self-hosted
+- Uses the Windows Python launcher (`py`) to run tests
+- Uses Windows PowerShell as the execution shell
+
+### Notes
+- On self-hosted runners, required tools (such as Python and Git) must be installed manually on the runner machine
+- The workflow uses `py -m unittest -v` instead of `python` to match the local Windows environment
+
+### Verification
+The workflow was successfully executed on the self-hosted Windows runner, and the job logs confirm that the runner handled the execution.
+
+---
+
 ## Summary
 
-This repository demonstrates a simple but complete CI setup using GitHub Actions,
-including automated testing with Python.
+This repository demonstrates a complete CI process using GitHub Actions:
+- Automatic workflows on push
+- Python unit testing
+- Matrix builds across multiple Python versions
+- Execution on both GitHub-hosted and self-hosted runners
+
+Each task was implemented incrementally, with commits documenting the progression.
 
