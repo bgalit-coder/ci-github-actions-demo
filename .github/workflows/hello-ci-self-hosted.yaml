@@ -15,6 +15,6 @@ jobs:
         run: echo "Hello, CI with GitHub Actions! (self-hosted)"
 
       - name: Run tests
-        shell: pwsh
+        shell: powershell
         run: py -m unittest -v
 
